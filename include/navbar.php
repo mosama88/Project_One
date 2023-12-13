@@ -24,7 +24,7 @@
         <?php endif; ?>
         <?php ?>
       </ul>
-      <?php if (!isset($_SESSION['auth'])) :?>
+      <?php if (isset($_SESSION['auth'])) :?>
       <ul class= "navbar-nav mr-auto mb-2 mb-lg-0">
       <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="logout.php">Logout</a>

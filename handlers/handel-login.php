@@ -43,13 +43,18 @@ if (!requierdVal($password)){
 
 
 //  Validation For Saving File 
-if(!empty($errors)){
-    $users_file = fopen("../data/users.csv", "a+");
-    // file_get_contents()
+$_SESSION['employee'][] =[
+    'name' => $name,
+    'email' => $email,
+    'password' => $password
+];
+if(empty($errors)){
+    $data = file_get_contents("../data/users.csv");
+    $data = json_decode($data, true);
     $data = [$name, $email, sha1($password)];
-    fputcsv($users_file, $data);
-    $_SESSION['auth'] = [$name, $email];
-    redirect("../index.php");
+
+    $_SESSION['auth'] = [$name, $email, sha1($password)];
+    redirect("../profile.php");
     die();
 
     //  Validation Error 
@@ -58,3 +63,12 @@ if(!empty($errors)){
     redirect("../login.php");
     die;    
 }
+
+
+
+// if (!file_exists("products.json")) {
+//     $data = file_get_contents("https://dummyjson.com/products");
+//     file_put_contents("products.json", $data);
+// }
+// $data = file_get_contents("products.json");
+// $data = json_decode($data, true);
